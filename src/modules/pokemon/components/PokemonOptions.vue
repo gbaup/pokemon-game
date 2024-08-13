@@ -4,10 +4,12 @@
             @click="$emit('selectedOption', id)"
             :key="id"
             :disabled="blockSelection"
-            :class="['capitalize',{
-              'bg-red-300': blockSelection && id === correctAnswer,
-              'bg-green-300': blockSelection && id !== correctAnswer
-            }]">
+            :class="
+            {
+              correct: blockSelection && id === correctAnswer,
+              incorrect: blockSelection && id !== correctAnswer
+            }
+            ">
       {{ name }}
     </button>
 
@@ -34,7 +36,15 @@ defineEmits<{
 <style scoped>
 
 button {
-  @apply bg-white shadow-md rounded-lg p-4 m-2 cursor-pointer text-center w-40 transition-all hover:bg-gray-300
+  @apply capitalize bg-white shadow-md rounded-lg p-4 m-2 cursor-pointer text-center w-40 transition-all hover:bg-gray-300
+}
+
+.correct {
+  @apply bg-green-300
+}
+
+.incorrect {
+  @apply bg-red-300
 }
 
 </style>
