@@ -6,13 +6,16 @@
   </section>
 
   <section v-else class="flex flex-col justify-center items-center h-screen w-screen">
-    <h1 class="mb-4">¿Quién es este pokemon dificil?</h1>
+    <h1 class="mb-4">¿Quién es este pokemon?</h1>
 
 
     <PokemonPicture :pokemon-id="randomPokemon.id"
                     :show-pokemon="gameStatus !== GameStatus.PLAYING" />
 
-    <PokemonInput />
+    <PokemonInput @check-input="checkInput"
+                  :correct-answer="randomPokemon.name"
+                  :game-status="gameStatus"
+    />
   </section>
 </template>
 
@@ -23,7 +26,7 @@ import { usePokemonGame } from '@/modules/pokemon/composables/usePokemonGame';
 import { GameStatus } from '@/modules/pokemon/interfaces';
 import PokemonInput from '@/modules/pokemon/components/PokemonInput.vue';
 
-const { gameStatus, isLoading, randomPokemon, pokemonsOptions: options, checkAnswer, nextQuestion } = usePokemonGame();
+const { gameStatus, isLoading, randomPokemon, checkInput, nextQuestion } = usePokemonGame();
 
 
 </script>

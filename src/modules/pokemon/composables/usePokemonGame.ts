@@ -55,6 +55,25 @@ export const usePokemonGame = () => {
 
   };
 
+  const checkInput = (name: string) => {
+
+    console.log('checkInput');
+
+    const hasWon = randomPokemon.value.name === name.trim().toLowerCase();
+
+    if (hasWon) {
+      gameStatus.value = GameStatus.WON;
+      confetti({
+        particleCount: 500,
+        spread: 170,
+        origin: { y: 0.6 },
+      });
+      return;
+    }
+
+    gameStatus.value = GameStatus.LOST;
+  };
+
   const nextQuestion = async () => {
 
     console.log('nextQuestion');
@@ -80,5 +99,6 @@ export const usePokemonGame = () => {
     randomPokemon,
     checkAnswer,
     nextQuestion,
+    checkInput,
   };
 };
